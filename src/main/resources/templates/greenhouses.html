@@ -61,6 +61,7 @@
             <th>#ID</th>
             <th>Sera Adı</th>
             <th>Büyüklük (m²)</th>
+            <th class="text-end">İşlemler</th>
           </tr>
           </thead>
           <tbody>
@@ -68,9 +69,17 @@
             <td class="text-muted fw-bold" th:text="'#' + ${gh.id}"></td>
             <td class="fw-bold text-dark"><i class="bi bi-geo-alt text-success me-2"></i><span th:text="${gh.name}"></span></td>
             <td><span class="badge bg-success rounded-pill px-3" th:text="${gh.size} + ' m²'"></span></td>
+            <td class="text-end">
+              <a th:href="@{/greenhouse/edit/{id}(id=${gh.id})}" class="btn btn-outline-primary btn-sm rounded-pill me-1">
+                <i class="bi bi-arrow-repeat"></i> Güncelle
+              </a>
+              <a th:href="@{/greenhouse/delete/{id}(id=${gh.id})}" class="btn btn-outline-danger btn-sm rounded-pill" onclick="return confirm('Bu serayı silmek istediğinize emin misiniz?');">
+                <i class="bi bi-trash"></i> Sil
+              </a>
+            </td>
           </tr>
           <tr th:if="${#lists.isEmpty(greenhouses)}">
-            <td colspan="3" class="text-center py-4 text-muted">Henüz hiç sera eklenmemiş.</td>
+            <td colspan="4" class="text-center py-4 text-muted">Henüz hiç sera eklenmemiş.</td>
           </tr>
           </tbody>
         </table>

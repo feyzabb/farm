@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class FarmController {
 
-
     @Autowired
     private FarmService farmService;
 
@@ -26,10 +25,29 @@ public class FarmController {
     }
 
     @PostMapping("/greenhouses/save")
-    public String saveGreenhouse(@ModelAttribute("newGreenhouse") Greenhouse greenhouse) {
+    public String saveGreenhouse(@ModelAttribute Greenhouse greenhouse) {
         farmService.saveGreenhouse(greenhouse);
         return "redirect:/greenhouses";
     }
+
+    // Güncelleme formunu açan metot (Senin eklediğin)
+    @GetMapping("/greenhouse/edit/{id}")
+    public String editGreenhouse(@PathVariable Long id, Model model) {
+        Greenhouse greenhouse = farmService.getGreenhouseById(id);
+        model.addAttribute("greenhouse", greenhouse);
+        return "edit-greenhouse";
+    }
+
+    // Eksik olan Sera Silme metodu
+    @GetMapping("/greenhouse/delete/{id}")
+    public String deleteGreenhouse(@PathVariable("id") Long id) {
+        farmService.deleteGreenhouse(id);
+        return "redirect:/greenhouses";
+    }
+
+    // ==========================================
+    // 2. MAHSUL (CROP) İŞLEMLERİ
+    // ==========================================
 
     @GetMapping("/crops")
     public String showCrops(Model model) {
@@ -40,7 +58,7 @@ public class FarmController {
     }
 
     @PostMapping("/crops/save")
-    public String saveCrop(@ModelAttribute("newCrop") Crop crop) {
+    public String saveCrop(@ModelAttribute Crop crop) {
         farmService.saveCrop(crop);
         return "redirect:/crops";
     }

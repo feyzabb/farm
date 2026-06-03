@@ -7,10 +7,10 @@ import com.agritech.farm.repository.GreenhouseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class FarmService {
-
 
     @Autowired
     private GreenhouseRepository greenhouseRepository;
@@ -18,6 +18,7 @@ public class FarmService {
     @Autowired
     private CropRepository cropRepository;
 
+    // --- GREENHOUSE (SERA) METOTLARI ---
 
     public List<Greenhouse> getAllGreenhouses() {
         return greenhouseRepository.findAll();
@@ -27,6 +28,17 @@ public class FarmService {
         greenhouseRepository.save(greenhouse);
     }
 
+    public void deleteGreenhouse(Long id) {
+        greenhouseRepository.deleteById(id);
+    }
+
+    // Güncelleme işlemi için serayı ID'sine göre bulur
+    public Greenhouse getGreenhouseById(Long id) {
+        Optional<Greenhouse> optional = greenhouseRepository.findById(id);
+        return optional.orElse(null);
+    }
+
+    // --- CROP (MAHSUL) METOTLARI ---
 
     public List<Crop> getAllCrops() {
         return cropRepository.findAll();
@@ -38,5 +50,11 @@ public class FarmService {
 
     public void deleteCrop(Long id) {
         cropRepository.deleteById(id);
+    }
+
+    // Güncelleme işlemi için mahsulü ID'sine göre bulur
+    public Crop getCropById(Long id) {
+        Optional<Crop> optional = cropRepository.findById(id);
+        return optional.orElse(null);
     }
 }

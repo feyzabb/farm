@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Sera Güncelle - AgriTech</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <style>
+    body { background-color: #f8fafc; font-family: 'Segoe UI', Tahoma, sans-serif; }
+    .navbar { background: linear-gradient(135deg, #059669 0%, #10b981 100%); padding: 1rem 0; }
+    .card { border: none; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
+    .card-header { background-color: transparent; border-bottom: 1px solid #f0f0f0; padding: 1.5rem; }
+    .btn-primary { background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); border: none; }
+  </style>
+</head>
+<body>
+<nav class="navbar navbar-dark mb-5 shadow-sm">
+  <div class="container d-flex justify-content-between align-items-center">
+    <a class="navbar-brand fw-bold fs-4" href="/greenhouses">
+      <i class="bi bi-tree me-2"></i>AgriTech Farm
+    </a>
+  </div>
+</nav>
+
+<div class="container d-flex justify-content-center">
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header pt-4">
+        <h5 class="fw-bold text-dark m-0"><i class="bi bi-arrow-repeat text-primary me-2"></i>Sera Bilgilerini Güncelle</h5>
+      </div>
+      <div class="card-body p-4">
+
+        <form th:action="@{/greenhouses/save}" th:object="${greenhouse}" method="post">
+
+          <input type="hidden" th:field="*{id}" />
+
+          <div class="mb-3">
+            <label class="form-label text-muted small fw-bold">Sera Adı / Bölge</label>
+            <input type="text" th:field="*{name}" class="form-control" required />
+          </div>
+
+          <div class="mb-4">
+            <label class="form-label text-muted small fw-bold">Büyüklük (Metrekare)</label>
+            <input type="number" step="0.1" th:field="*{size}" class="form-control" required />
+          </div>
+
+          <div class="d-flex gap-2">
+            <a href="/greenhouses" class="btn btn-light w-50 rounded-pill py-2 fw-bold">İptal</a>
+            <button type="submit" class="btn btn-primary w-50 rounded-pill py-2 fw-bold">Değişiklikleri Kaydet</button>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

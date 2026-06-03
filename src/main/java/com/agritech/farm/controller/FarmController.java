@@ -30,7 +30,6 @@ public class FarmController {
         return "redirect:/greenhouses";
     }
 
-    // Güncelleme formunu açan metot (Senin eklediğin)
     @GetMapping("/greenhouse/edit/{id}")
     public String editGreenhouse(@PathVariable Long id, Model model) {
         Greenhouse greenhouse = farmService.getGreenhouseById(id);
@@ -38,16 +37,12 @@ public class FarmController {
         return "edit-greenhouse";
     }
 
-    // Eksik olan Sera Silme metodu
     @GetMapping("/greenhouse/delete/{id}")
     public String deleteGreenhouse(@PathVariable("id") Long id) {
         farmService.deleteGreenhouse(id);
         return "redirect:/greenhouses";
     }
 
-    // ==========================================
-    // 2. MAHSUL (CROP) İŞLEMLERİ
-    // ==========================================
 
     @GetMapping("/crops")
     public String showCrops(Model model) {

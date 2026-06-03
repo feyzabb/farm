@@ -18,7 +18,6 @@ public class FarmService {
     @Autowired
     private CropRepository cropRepository;
 
-    // --- GREENHOUSE (SERA) METOTLARI ---
 
     public List<Greenhouse> getAllGreenhouses() {
         return greenhouseRepository.findAll();
@@ -32,13 +31,11 @@ public class FarmService {
         greenhouseRepository.deleteById(id);
     }
 
-    // Güncelleme işlemi için serayı ID'sine göre bulur
     public Greenhouse getGreenhouseById(Long id) {
         Optional<Greenhouse> optional = greenhouseRepository.findById(id);
         return optional.orElse(null);
     }
 
-    // --- CROP (MAHSUL) METOTLARI ---
 
     public List<Crop> getAllCrops() {
         return cropRepository.findAll();
@@ -52,7 +49,6 @@ public class FarmService {
         cropRepository.deleteById(id);
     }
 
-    // Güncelleme işlemi için mahsulü ID'sine göre bulur
     public Crop getCropById(Long id) {
         Optional<Crop> optional = cropRepository.findById(id);
         return optional.orElse(null);
